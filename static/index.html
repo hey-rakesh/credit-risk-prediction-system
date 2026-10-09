@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0b1020" />
+  <title>Credence — Credit Risk Intelligence</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="Credence home"><span class="brand-mark">C</span><span>credence<span class="brand-dot">.</span></span></a>
+    <div class="topbar-right"><span class="status-dot"></span><span>ML engine <b>ready</b></span><span class="top-divider"></span><span class="version">CREDIT INTELLIGENCE / 01</span></div>
+  </header>
+
+  <main class="layout">
+    <section class="intro">
+      <div class="eyebrow"><span class="eyebrow-line"></span> DECISION SUPPORT PLATFORM</div>
+      <h1>See the risk.<br><span>Know the next move.</span></h1>
+      <p class="intro-copy">A smarter first look at a loan application. Enter applicant details to estimate default risk using your trained machine-learning model.</p>
+      <div class="trust-row">
+        <div class="trust-icon">✦</div><div><strong>Model-powered insights</strong><small>Probability-led, threshold-based prediction</small></div>
+      </div>
+      <div class="mini-stats">
+        <div><span class="mini-number">01</span><span class="mini-label">Applicant<br>profile</span></div>
+        <div class="stat-rule"></div>
+        <div><span class="mini-number">02</span><span class="mini-label">Risk<br>assessment</span></div>
+        <div class="stat-rule"></div>
+        <div><span class="mini-number">03</span><span class="mini-label">Decision<br>support</span></div>
+      </div>
+      <p class="disclaimer">Designed for educational and decision-support use. This estimate is not a lending decision or financial advice.</p>
+    </section>
+
+    <section class="workspace">
+      <div class="panel form-panel">
+        <div class="panel-heading">
+          <div><div class="section-kicker">NEW ASSESSMENT</div><h2>Applicant profile</h2></div>
+          <span class="step-pill"><span></span> STEP 01 / 02</span>
+        </div>
+        <form id="loan-form">
+          <div class="form-section-title"><span class="section-index">A</span><span>PERSONAL DETAILS</span></div>
+          <div class="field-grid">
+            <label class="field"><span>Age <i>years</i></span><input name="person_age" type="number" min="18" max="100" value="28" required /><small>Applicant's current age</small></label>
+            <label class="field"><span>Annual income <i>₹</i></span><input name="person_income" type="number" min="0" step="1000" value="600000" required /><small>Gross yearly income</small></label>
+            <label class="field"><span>Home ownership</span><select name="person_home_ownership" required><option value="RENT">Rent</option><option value="MORTGAGE">Mortgage</option><option value="OWN">Own</option><option value="OTHER">Other</option></select></label>
+            <label class="field"><span>Employment length <i>years</i></span><input name="person_emp_length" type="number" min="0" max="60" step="0.5" value="3" required /></label>
+          </div>
+          <div class="form-section-title"><span class="section-index">B</span><span>LOAN DETAILS</span></div>
+          <div class="field-grid">
+            <label class="field"><span>Loan purpose</span><select name="loan_intent" required><option value="PERSONAL">Personal</option><option value="EDUCATION">Education</option><option value="MEDICAL">Medical</option><option value="VENTURE">Business venture</option><option value="HOMEIMPROVEMENT">Home improvement</option><option value="DEBTCONSOLIDATION">Debt consolidation</option></select></label>
+            <label class="field"><span>Loan grade</span><select name="loan_grade" required><option value="A">A — strongest</option><option value="B">B</option><option value="C" selected>C</option><option value="D">D</option><option value="E">E</option><option value="F">F</option><option value="G">G — weakest</option></select></label>
+            <label class="field"><span>Loan amount <i>₹</i></span><input name="loan_amnt" type="number" min="1" step="500" value="150000" required /></label>
+            <label class="field"><span>Interest rate <i>%</i></span><input name="loan_int_rate" type="number" min="0" max="100" step="0.01" value="12.5" required /></label>
+            <label class="field"><span>Loan / income ratio <i>%</i></span><input name="loan_percent_income" type="number" min="0" max="1" step="0.01" value="0.25" required /><small>Enter as decimal: 0.25 = 25%</small></label>
+          </div>
+          <div class="form-section-title"><span class="section-index">C</span><span>CREDIT HISTORY</span></div>
+          <div class="field-grid two-col">
+            <label class="field"><span>Previous default on file?</span><select name="cb_person_default_on_file" required><option value="N">No</option><option value="Y">Yes</option></select></label>
+            <label class="field"><span>Credit history <i>years</i></span><input name="cb_person_cred_hist_length" type="number" min="0" max="80" value="5" required /></label>
+          </div>
+          <div class="form-error" id="form-error" role="alert"></div>
+          <button class="submit-btn" id="submit-btn" type="submit"><span class="button-label">Analyze credit risk</span><span class="button-arrow">↗</span></button>
+          <p class="form-footnote"><span class="lock-icon">◇</span> Your inputs are sent to the prediction API for this assessment.</p>
+        </form>
+      </div>
+
+      <aside class="panel result-panel" id="result-panel">
+        <div class="panel-heading result-heading"><div><div class="section-kicker">MODEL OUTPUT</div><h2>Risk overview</h2></div><span class="live-tag"><span></span> LIVE</span></div>
+        <div class="result-empty" id="result-empty">
+          <div class="orbit"><div class="orbit-core">✦</div><span class="orbit-dot dot-a"></span><span class="orbit-dot dot-b"></span><span class="orbit-dot dot-c"></span></div>
+          <h3>Your assessment<br>starts here.</h3>
+          <p>Complete the applicant profile and run an analysis to see the model's estimated default probability.</p>
+          <div class="empty-steps"><span>01</span> Fill in the details <span class="step-chevron">→</span></div>
+          <div class="empty-steps"><span>02</span> Generate risk estimate <span class="step-chevron">→</span></div>
+        </div>
+        <div class="result-content hidden" id="result-content">
+          <div class="result-label">ESTIMATED DEFAULT PROBABILITY</div>
+          <div class="probability-line"><strong id="probability-value">—</strong><span id="risk-chip" class="risk-chip">—</span></div>
+          <div class="meter"><div class="meter-fill" id="meter-fill"></div><span class="threshold-marker" id="threshold-marker"></span></div>
+          <div class="meter-labels"><span>0% · Lower probability</span><span>100% · Higher probability</span></div>
+          <div class="result-divider"></div>
+          <div class="decision-card" id="decision-card"><div class="decision-icon" id="decision-icon">↗</div><div><small>MODEL CLASSIFICATION</small><h3 id="decision-title">—</h3><p id="decision-copy">—</p></div></div>
+          <div class="result-metrics">
+            <div><span>Decision threshold</span><strong id="threshold-value">—</strong></div>
+            <div><span>API status</span><strong class="api-ok"><span></span> Successful</strong></div>
+          </div>
+          <button type="button" class="reset-btn" id="reset-btn">↺ <span>Reset assessment</span></button>
+        </div>
+        <div class="result-loading hidden" id="result-loading"><div class="loader"></div><h3>Reading the signals</h3><p>Sending applicant data to your ML model…</p><div class="loading-track"><span></span></div></div>
+        <div class="result-error hidden" id="result-error"><div class="error-mark">!</div><h3>Couldn’t complete the assessment</h3><p id="error-message">Check that the API is running and the model files are available.</p><button id="retry-btn" type="button">Try again ↗</button></div>
+        <div class="result-bottom"><span>POWERED BY YOUR ML MODEL</span><span>PROBABILITY ≠ CERTAINTY</span></div>
+      </aside>
+    </section>
+  </main>
+  <footer><span>© 2026 CREDENCE</span><span>BUILT FOR RESPONSIBLE MODEL EXPLORATION</span></footer>
+  <script src="/static/script.js"></script>
+</body>
+</html>
